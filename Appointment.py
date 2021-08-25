@@ -102,7 +102,7 @@ save_button.grid(row = 4,columnspan = 2)
 doctors_button =Button(Dataframeleft,text = "OUR DOCTORS" ,  font = ('calibri', 14 , ) ,width = 22 , bg = 'grey', relief =SUNKEN  ,borderwidth = 5 )
 doctors_button.grid(row = 5,columnspan = 2)
 logout_button =Button(Dataframeleft,text = "LOG OUT" ,  font = ('calibri', 14 , ) ,width = 22 , bg = 'grey', relief =SUNKEN  ,borderwidth = 5 )
-logout_button.grid(row = 6,columnspan = 2)   
+logout_button.grid(row = 6,columnspan = 2)
 
 
 
