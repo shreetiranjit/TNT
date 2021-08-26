@@ -104,7 +104,7 @@ def registrationform():
     Title_frame_label.grid()
     Bottom_frame_details = Frame(root, bd=10,width=1350,bg='white', height=200, padx=25, relief=RIDGE)
     Bottom_frame_details.pack(side=BOTTOM)
-    Entry_frame_details = Frame(root, bd=10,bg='light blue', width=1250, height=450, padx=250, relief=RIDGE)
+    Entry_frame_details =Frame(root, bd=10,bg='light blue', width=1250, height=450, padx=250, relief=RIDGE)
     Entry_frame_details.pack(side=BOTTOM)
 
     # create textLabels
