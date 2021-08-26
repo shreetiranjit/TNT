@@ -2,66 +2,30 @@ from tkinter import *
 from tkinter import messagebox
 import os
 from registration import registrationform
-root=Tk()
-def main_screen():
-    global screen
-    screen = Tk()
-    screen.geometry('1000x560')
-    bg = PhotoImage(file="C:/Users/RUPA/Downloads/tnthospital.png")
 
-
-
-    label1 = Label(screen, image=bg)
-    label1.place(x=0, y=0)
-    screen.title('Login | Hospital Management System')
-    Label(text=" ", bg='white').pack()
-    Label(text="", bg='white').pack()
-    Label(text="", bg='white').pack()
-    Label(text="", bg='white').pack()
-    Button(text="Login", height="3", width="30", font=("CALBRIA", 14, "bold"), fg="black", command=login).pack()
-    Label(text="").pack()
-    Button(text="Register", height="3", width="30", font=("CALBRIA", 14, "bold"), fg="black",
-           command=register).pack()
-
-    screen.mainloop()
-
-def delete3():
-    screen4.destroy()
-def delete4():
-    screen5.destroy()
 def login_success():
 
     messagebox.showinfo(screen, "Login Successful")
     screen2.destroy()
-    screen.destroy()
     registrationform()
 def password_not_recognised():
-    global screen4
-    screen4 = Toplevel(screen)
-    screen4.title("Success")
-    screen4.geometry('150x100')
-    Label(screen4, text="Password Error").pack()
-    Button(screen4, text="OK", command=delete3).pack()
+    messagebox.showwarning('ALERT', 'INCORRECT PASSWORD.')
 def user_not_found():
-    global screen5
-    screen5 = Toplevel(screen)
-    screen5.title("Success")
-    screen5.geometry('150x100')
-    Label(screen5, text="User Not Found").pack()
-    Button(screen5, text="OK", command=delete4).pack()
+    messagebox.showwarning('ALERT','USER NOT FOUND!!!')
+
 
 def register_user():
     a = ''
     if username_entry.get() == a and password_entry.get() == a and password_entry2.get() == a :
-        messagebox.showwarning('ALERT' , 'PLEASE FILL ALL THE BOXES')
+        messagebox.showwarning('ALERT' , 'PLEASE FILL ALL THE BOXES.')
     elif username_entry.get() == a :
-        messagebox.showwarning('ALERT' , 'PLEASE FILL THE BOX')
+        messagebox.showwarning('ALERT' , 'PLEASE FILL THE BOX.')
     elif password_entry.get() == a :
-        messagebox.showwarning('ALERT' , 'PLEASE FILL THE password')
+        messagebox.showwarning('ALERT' , 'PLEASE WRITE THE PASSWORD.')
     elif password_entry2.get() == a :
-        messagebox.showwarning('ALERT' , 'PLEASE FILL THE BOX')
+        messagebox.showwarning('ALERT' , 'PLEASE CONFIRM YOUR PASSWORD TO CONTINUE.')
     elif password_entry.get()  != password_entry2.get() :
-        messagebox.showwarning('ALERT', 'password is not same')
+        messagebox.showwarning('ALERT', "SORRY !!! PASSWORD DONOT MATCH.")
 
     else :
         username_info = username.get()
@@ -77,6 +41,7 @@ def register_user():
         screen.destroy()
 
 def login_verify():
+
     username1 = username_verify.get()
     password1 = password_verify.get()
     username_entry1.delete(0, END)
@@ -92,14 +57,12 @@ def login_verify():
             password_not_recognised()
     else:
         user_not_found()
-
-
-
 def register():
     global screen1
     screen1 = Toplevel(screen)
     screen1.title("Register")
     screen1.geometry("300x250")
+
     global username
     global  password
     global username_entry
@@ -121,12 +84,15 @@ def register():
     password_entry2.pack()
     Label(screen1, text="").pack()
     Button(screen1, text="Register", width=10, height=1,fg="blue",font=("calbria", 13), command=register_user).pack()
-
 def login():
     global screen2
     screen2 = Toplevel(screen)
     screen2.title("Login")
-    screen2.geometry("1000x560")
+    screen2.geometry("300x250")
+    #image
+    bg = PhotoImage(file="C:/Users/RUPA/Downloads/tnthospital.png")
+    label1 = Label(screen2, image=bg)
+    label1.place(x=0, y=0)
     Label(screen2, text="Please enter details below to login", fg="blue",font=("calbria", 13)).pack()
     Label(screen2, text="").pack()
     global username_verify
@@ -145,8 +111,23 @@ def login():
 
     Label(screen2, text="").pack()
     Button(screen2, text="Login", width=10, height=1, fg="blue",font=("calbria", 13),command=login_verify).pack()
+def main_screen():
+    global screen
+    screen = Tk()
+    screen.geometry('1000x560')
+    screen.title('Login | Hospital Management System')
+    #image
+    global bg
+    bg = PhotoImage(file="C:/Users/RUPA/Downloads/tnthospital.png")
+    label1 = Label(screen, image=bg)
+    label1.place(x=0, y=0)
+    #textboxes
+    Label(text=" ",bg ='white').pack()
+    Label(text="",bg ='white').pack()
+    Label(text="", bg='white').pack()
+    Label(text="", bg='white').pack()
+    Button(text="Login", height="3", width="30", font=("CALBRIA", 14, "bold"),fg="black", command=login).pack()
+    Label(text="",bg='white').pack()
+    Button(text="Register", height="3", width="30", font=("CALBRIA", 14, "bold"), fg="black",  command=register).pack()
 
-
-
-
-main_screen()
+    screen.mainloop()
