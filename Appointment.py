@@ -4,6 +4,7 @@ from tkinter import  messagebox
 root = Tk()
 root.title('Appointment' )
 root.geometry('1100x800')
+root.resizable(0,0)
 
 title = Label(root, text='PATIENTS DETAILS', bg='powder blue', fg='green',bd=10,relief=RIDGE, font=("times new roman", 25,"bold"),padx=2, pady=6)
 title.pack(side=TOP, fill=X)
@@ -70,6 +71,9 @@ mediation_label = Label(Dataframeright1, text='Mediation you are on', font=('cal
 mediation_label.grid(row=8, column=0, columnspan=2)
 symptom1_label = Label(Dataframeright1, text='Symptom of what', font=('calibri', 14,),width=15, relief=SUNKEN)
 symptom1_label.grid(row=10, column=0, columnspan=2)
+symptom2_label = Label(Dataframeright1, text='Any Allergies', font=('calibri', 14,),width=15, relief=SUNKEN)
+symptom2_label.grid(row=12, column=0, columnspan=2)
+
 
 name = Entry(Dataframeright1, font=('calibri', 14,),width=15, relief=SUNKEN)
 name.grid(row=0, column=2, padx=15, pady=10)
@@ -83,6 +87,8 @@ mediation = Entry(Dataframeright1, font=('calibri', 14,),width=15, relief=SUNKEN
 mediation.grid(row=8, column=2, padx=15, pady=10)
 symptom1= Entry(Dataframeright1, font=('calibri', 14,),width=15, relief=SUNKEN)
 symptom1.grid(row=10, column=2, padx=15, pady=10)
+symptom2= Entry(Dataframeright1, font=('calibri', 14,),width=15, relief=SUNKEN)
+symptom2.grid(row=112, column=2, padx=15, pady=10)
 
 
 
