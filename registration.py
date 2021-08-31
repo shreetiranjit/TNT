@@ -3,7 +3,7 @@ import sqlite3
 def registrationform():
     root = Toplevel()
     root.title('Registration')
-    root.geometry('1450x800+0+0')
+    root.geometry('1490x800+0+0')
     root.resizable(0, 0)
 
     #connect to database
@@ -220,18 +220,18 @@ def registrationform():
     Title_frame_label.pack(side=TOP, fill=X)
 
     frame = Frame(root, bd=12, relief=RIDGE, padx=20, bg='#C4FFB5')
-    frame.place(x=0, y=100, width=1450, height=490)
+    frame.place(x=0, y=100, width=1490, height=490)
 
     Entry_frame_details = LabelFrame(frame, bd=10, bg='#B3E5FF', padx=250, relief=RIDGE)
     Entry_frame_details.place(x=0, y=5, width=1150, height=450)
 
-    Button_frame_rights = LabelFrame(frame, bd=10, bg='#78CFF6', padx=250, relief=RIDGE)
-    Button_frame_rights.place(x=1180, y=5, width=200, height=450)
+    Button_frame_rights = LabelFrame(frame, bd=10, bg='#B3E5FF', padx=250, relief=RIDGE)
+    Button_frame_rights.place(x=1150, y=5, width=290, height=450)
 
     Bottom_frame_details = Frame(root, bd=10, bg='#C4FFB5', padx=25, relief=RIDGE)
     Bottom_frame_details.place(x=0, y=600, width=1450, height=200)
 
-    Recordframedetails = LabelFrame(Bottom_frame_details, text='Records', bd=7, bg='#78CFF6',
+    Recordframedetails = LabelFrame(Bottom_frame_details, text='Records', bd=7, bg='#B3E5FF',
                                     font=("times new roman", 12, "bold"), relief=RIDGE)
     Recordframedetails.place(x=0, y=5, width=1375, height=175)
 
@@ -307,18 +307,37 @@ def registrationform():
     drop3 = OptionMenu(Entry_frame_details, btype_dropdown, *blood_type)
     drop3.place(x=380, y=340)
 
-    submit_btn = Button(Button_frame_rights, font=('calibri', 16, 'bold'), text="Save", bg='green', fg='white',
-                        command=submit)
-    submit_btn.grid(row=1, column=1)
-    query_btn = Button(Button_frame_rights, font=('calibri', 16, 'bold',), text="Display", bg='green', fg='white',
-                       command=query)
-    query_btn.grid(row=2, column=1)
-    delete_box = Button(Button_frame_rights, font=('calibri', 16, 'bold'), text="Delete", bg='red', fg='white',
-                        command=delete)
-    delete_box.grid(row=3, column=1)
-    edit_btn = Button(Button_frame_rights, font=('calibri', 16, 'bold'), text="Update", bg='green', fg='white',
-                      command=edit)
-    edit_btn.grid(row=4, column=1)
+
+    global bg1
+    bg1 = PhotoImage(file="SAVE.png")
+
+
+    global bg2
+    bg2 = PhotoImage(file="DISPLAY.png")
+
+
+    global bg3
+    bg3 = PhotoImage(file="UPDATE.png")
+
+
+    global bg4
+    bg4 = PhotoImage(file="DELETE.png")
+
+    global bg5
+    bg5 = PhotoImage(file="APPOINTMENT.png")
+
+    submit_btn = Button(Button_frame_rights, image=bg1, borderwidth=0, height=40, width=150, command=submit)
+    submit_btn.place(x=-210, y=20)
+    query_btn = Button(Button_frame_rights, image=bg2, borderwidth=0, height=40, width=150, command=query)
+    query_btn.place(x=-210, y=100)
+    edit_btn = Button(Button_frame_rights, image=bg3, borderwidth=0, height=55, width=150)
+    edit_btn.place(x=-210, y=180)
+    delete_box = Button(Button_frame_rights, image=bg4, borderwidth=0, height=40, width=150, command=delete)
+    delete_box.place(x=-210, y=260)
+    appointment_btn = Button(Button_frame_rights, image=bg5, borderwidth=0, height=30, width=250)
+    appointment_btn.place(x=-240, y=340)
+
+
     conn.commit()
     conn.close()
     mainloop()
