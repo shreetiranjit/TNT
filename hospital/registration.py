@@ -100,12 +100,17 @@ def registrationform():
     Title_frame = Frame(root, bd=10,bg='red', width=1500, padx=20, relief=RIDGE)
     Title_frame.pack(side=TOP)
     Title_frame_label = Label(Title_frame, font=('calibri', 20, 'bold'), bg='red',fg='white',
-                              text='HOSPITAL MANAGEMENT SYSTEM', padx=20)
+                              text='HOSPITAL MANAGEMENT SYSTEM', padx=40)
     Title_frame_label.grid()
+    #image
+
     Bottom_frame_details = Frame(root, bd=10,width=1350,bg='white', height=200, padx=25, relief=RIDGE)
     Bottom_frame_details.pack(side=BOTTOM)
-    Entry_frame_details =Frame(root, bd=10,bg='light blue', width=1250, height=450, padx=250, relief=RIDGE)
+
+    Entry_frame_details =Frame(root, bd=10,bg='light blue', width=1150, height=450, padx=250, relief=RIDGE)
     Entry_frame_details.pack(side=BOTTOM)
+
+
 
     # create textLabels
     first_name_label = Label(Entry_frame_details, text='First Name',bg='light blue', font=('calibri', 14, 'bold'))
@@ -194,3 +199,17 @@ def registrationform():
     conn.close()
 
     mainloop()
+
+    btn_frame = Frame(screen, bg='black')
+    btn_frame.place(x=480, y=95, height=350, width=400)
+
+    # textboxes
+    global bg3
+    bg3 = PhotoImage(file='C:/Users/RUPA/Downloads/LOGINB.png')
+    global bg4
+    bg4 = PhotoImage(file='C:/Users/RUPA/Downloads/REGISTERB.png')
+
+    login_btn1 = Button(btn_frame, image=bg3, command=login)
+    login_btn1.place(x=490, y=160, height=3, width=30)
+    register_btn1 = Button(btn_frame, image=bg4, command=register)
+    register_btn1.place(x=490, y=300, height=3, width=30)
