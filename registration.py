@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from appointment import *
 def registrationform():
     root = Toplevel()
     root.title('Registration')
@@ -8,20 +9,22 @@ def registrationform():
     conn = sqlite3.connect('Hospitalmanagement.db')
     #create a cursor
     c = conn.cursor()
-    #c.execute(('''CREATE TABLE addressb(
-    #        first_name  text ,
-     #         last_name text ,
-     #       age integer ,
-     #        address text ,
-     #        date_of_birth integer ,
-     #       gender text ,
-     #        father_name text ,
-     #        mother_name text ,
-     #        blood_group text ,
-     #        contact_number integer ,
-     #       email_address text,
-     #      marital_status text
-     #    )'''))
+    """
+    c.execute(('''CREATE TABLE addressb(
+            first_name  text ,
+              last_name text ,
+            age integer ,
+             address text ,
+            date_of_birth integer ,
+            gender text ,
+             father_name text ,
+             mother_name text ,
+            blood_group text ,
+            contact_number integer ,
+            email_address text,
+          marital_status text
+        )'''))
+    """
 
     #Back-end
     def submit():
@@ -92,7 +95,59 @@ def registrationform():
         conn.commit()
         conn.close()
 
+    def update():
 
+        conn = sqlite3.connect('Hospitalmanagement.db')
+        c = conn.cursor()
+        record_id = delete_box_entry.get()
+
+        c.execute("SELECT *FROM addressb WHERE oid=" + record_id)
+        record = c.fetchall()
+
+        for records in record:
+            first_name.insert(0, records[0])
+            last_name.insert(0, records[1])
+            age.insert(0, records[2])
+            address.insert(0, records[3])
+            date_of_birth.insert(0, records[4])
+            father_name.insert(0, records[6])
+            mother_name.insert(0, records[7])
+            Contact_number.insert(0, records[9])
+            Email_address.insert(0, records[10])
+
+    def editor():
+        conn = sqlite3.connect('Hospitalmanagement.db')
+        c = conn.cursor()
+        record_id = delete_box_entry.get()
+        c.execute("""UPDATE addressb SET
+             first_name = :first,
+             last_name = :last,
+             age= :age,
+             address = :address,
+             date_of_birth= :dob,
+             father_name = :father,
+             mother_name = :mother,
+             Contact_number = :contact,
+             Email_address = :email
+
+             WHERE oid = :oid""",
+                  {'first': first_name.get(),
+                   'last': last_name.get(),
+                   'age': age.get(),
+                   'address': address.get(),
+                   'dob': date_of_birth.get(),
+                   'father': father_name.get(),
+                   'mother': mother_name.get(),
+                   'contact': Contact_number.get(),
+                   'email': Email_address.get(),
+                   'oid': record_id
+                   })
+
+        conn.commit()
+        conn.close()
+
+    def appoint():
+        appoint1()
 
 
 
@@ -181,8 +236,12 @@ def registrationform():
     query_btn.place(x=300, y=430)
     delete_box = Button(root, font=('calibri', 16, 'bold'), text="Delete", bg='red', fg='white',command = delete )
     delete_box.place(x=500, y=430)
-    edit_btn = Button(root, font=('calibri', 16, 'bold'), text="Update", bg='green', fg='white')
+    edit_btn = Button(root, font=('calibri', 16, 'bold'), text="Update", bg='green', fg='white', command = update)
     edit_btn.place(x=400, y=430)
+    save_button = Button(root, text="Save record", command=editor)
+    save_button.place(x=690, y=430)
+    appointment_button = Button(root, text="APPOINTMENT ", command=appoint)
+    appointment_button.place(x=800, y=430)
     conn.commit()
     conn.close()
     mainloop()
