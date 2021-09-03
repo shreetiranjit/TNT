@@ -6,7 +6,7 @@ def lod():
         canvas.delete('image')
         # create next image
         canvas.create_image(20, 20, anchor=NW, image=listing[int(i)-1] ,tags = 'image') #Tagging something means that you have given that thing one or more strings that act as labels.
-    root = Tk()
+    root = Toplevel()
     root.title(' DOCTORS AVAILABLE')
 
     Title_frame_label = Label(root, font=('Courier', 30, 'roman','bold'),fg = "BLACK" , text='OUR DOCTORS',
