@@ -16,6 +16,7 @@ frame1.place(x=0, y=100, width=580, height=30)
 frame2 = Frame(root, bg='#FFDAB9')
 frame2.place(x=0, y=130, width=580, height=30)
 frame3 = Frame(root, bg="#FFA07A")
+
 frame3.place(x=0, y=160, width=580, height=30)
 frame4 = Frame(root, bg='#FFDAB9')
 frame4.place(x=0, y=190, width=580, height=30)
