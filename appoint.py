@@ -1,16 +1,18 @@
 from tkinter import *
+from prescriptionB import *
 from list_of_doctors import *
 import sqlite3
 from tkinter import messagebox
+
 def appoint2():
-    root = Tk()
+    root = Toplevel()
     root.title('Appointment')
     root.geometry('1100x800')
     title = Label(root, text='PATIENTS DETAILS', bg='powder blue', fg='green', bd=10, relief=RIDGE,
                   font=("times new roman", 25, "bold"), padx=2, pady=6)
     title.pack(side=TOP, fill=X)
 
-    # connect to database
+    # creating to database
     conn = sqlite3.connect('check.db')
     # Creating the cursor
     c = conn.cursor()
@@ -47,24 +49,16 @@ def appoint2():
         conn.close()
 
 
-        condition.delete(0 ,END )
-        medications.delete(0 , END)
-        symptoms.delete(0, END)
-        cale_entry.delete(0, END)
-        symptom2.delete(0, END)
-        doc_entry.delete(0, END)
-
-
     def query():
         conn = sqlite3.connect("Hospitalmanagement.db")
         c = conn.cursor()
         c.execute(
-             "SELECT * FROM addressb  WHERE oid=" + ID_e.get() )
+             "SELECT * FROM addressb  WHERE oid=" + ID_e.get())
         record1 = c.fetchall()
-
         print(record1)
 
         for records in record1:
+            name.insert(0, records[1])
             name.insert(0, records[0])
             age.insert(0, records[2])
             gender.insert(0, records[5])
@@ -84,11 +78,20 @@ def appoint2():
             symptom2.insert(0 , recordss[4])
             doc_entry.insert(0 , recordss[5])
 
+        global print_record
+        global print_record1
         print_record = ''
-        for records in record1:
+        print_record1 = ''
+        for records in record1 :
             print_record += str(records[0]) + "\t" + str(records[1]) + str(records[2]) + str(records[3])  + " " + "\n"
-        query_label = Label(framedetails, text=print_record)
-        query_label.place(x =50  , y  = 20 )
+        query_label = Label(framedetails, text=print_record , bg = "powder blue")
+        query_label.place(x=50, y=20)
+        for records1 in record2 :
+            print_record1 += str(records1[0]) + "\t" + str(records1[1]) + str(records1[2]) + str(records1[3])+ str(records1[4])+ str(records1[5])
+
+        query_label1 = Label(framedetails, text=print_record1 , bg = "powder blue")
+        query_label1.place(x =100  , y  = 20 )
+
 
     def update():
         conn = sqlite3.connect("Hospitalmanagement.db")
@@ -107,9 +110,6 @@ def appoint2():
 
         conn1 = sqlite3.connect('check.db')
         c1 = conn1.cursor()
-
-
-
         c1.execute("SELECT  * FROM appointment_test3 WHERE oid=" + ID_e.get())
         record2 = c1.fetchall()
 
@@ -124,30 +124,49 @@ def appoint2():
     def editor():
         conn = sqlite3.connect('check.db')
         c = conn.cursor()
-
-        c.execute("""UPDATE appointment_test3 SET
-           p_conditions= :condition,
-           medication= :medications,
-           symptoms = :symptoms , 
-           cal_check= :cale_entry ,
-           allergy= :symptom2 ,
-           doctors= :doc_entry
-
-
+        record_id1 = ID_e.get()
+        c.execute("""UPDATE appointment_test3 SET 
+                  p_conditions = :condition , 
+             medication = :medicine , 
+           symptoms = :symptom , 
+           cal_check = :date, 
+           allergy = :allergies , 
+           doctors = :doc
+           
            WHERE oid = :oid""",
                   {'condition': condition.get(),
-                   'medications': medications.get(),
-                   'symptoms': symptoms.get(),
-                   'cale_entry': cale_entry.get(),
-                   'symptom2': symptom2.get(),
-                   'doc_entry': doc_entry.get(),
-                   'oid': ID_e
+                   'medicine': medications.get(),
+                   'symptom': symptoms.get(),
+                   'date': cale_entry.get(),
+                   'allergies': symptom2.get(),
+                   'doc': doc_entry.get(),
+                   'oid': record_id1
 
-                   })
+                  })
+        conn.commit()
+        conn.close()
+        messagebox.showinfo('SUCCESS ', 'DATA HAS BEEN UPDATED SUCCESFULLY!!!')
+
+    def clear():
+        name.delete(0, END)
+        age.delete(0, END)
+        gender.delete(0, END)
+        condition.delete(0, END)
+        symptoms.delete(0, END)
+        symptom2.delete(0, END)
+        doc_entry.delete(0, END)
+        cale_entry.delete(0, END)
+        medications.delete(0, END)
 
     # ourdoctors
     def doctors():
         lod()
+
+
+
+    def prescription_for_patient():
+        prescribe2()
+
     #frames
     frame=Frame(root, bd=12, relief=RIDGE, padx=20, bg='powder blue')
     frame.place(x=0 , y=90, width=1100, height=430)
@@ -246,8 +265,15 @@ def appoint2():
     doctors_button = Button(Dataframeleft, text="OUR DOCTORS", font=('calibri', 14,), width=22, bg='grey', relief=SUNKEN,
                             borderwidth=5 ,command = doctors)
     doctors_button.grid(row=5, columnspan=2)
-    logout_button = Button(Dataframeleft, text="LOG OUT", font=('calibri', 14,), width=22, bg='grey', relief=SUNKEN,
-                           borderwidth=5 )
-    logout_button.grid(row=6, columnspan=2)
+    # logout_button = Button(Dataframeleft, text="LOG OUT", font=('calibri', 14,), width=22, bg='grey', relief=SUNKEN,
+    #                        borderwidth=5 ,command = logout)
+    # logout_button.grid(row=6, columnspan=2)
+    clear_button = Button(Dataframeleft, text="CLEAR", font=('calibri', 14,), width=22, bg='grey', relief=SUNKEN,
+                           borderwidth=5 , command = clear)
+    clear_button.grid(row=7, columnspan=2)
+    precription_button = Button(Dataframeright2, text="CLICK HERE FOR YOUR PRECRIPTION.", font=('calibri', 14,), width=22, bg='grey', relief=SUNKEN,
+                          borderwidth=5, command=prescription_for_patient)
+    precription_button.place(x = 20 , y = 50)
+
 
     mainloop()
