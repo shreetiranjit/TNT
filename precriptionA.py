@@ -116,7 +116,6 @@ def prescribe1():
         c2.execute("SELECT * FROM prescribeC where oid=" + ID_entry.get())
         record3 = c2.fetchall()
         print(record3)
-
         for records3 in record3:
             diagnosed_entry1.insert(0, records3[0])
             diagnosed_entry2.insert(0, records3[1])
