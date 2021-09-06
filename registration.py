@@ -1,6 +1,9 @@
 from tkinter import *
 import sqlite3
-from appointment import *
+from precriptionA import *
+from appoint import *
+
+
 def registrationform():
     root = Toplevel()
     root.title('Registration')
@@ -69,7 +72,7 @@ def registrationform():
         print_record = ''
         for record in records:
             print_record += str(record[0]) + ' ' + str(record[1]) + ' ' + '\t' + str(record[12]) + "\n"
-        query_label = Label(Bottom_frame_details, text=print_record)
+        query_label = Label(Bottom_frame_details, text=print_record )
         query_label.place(x= 0, y = 0)
         conn.commit()
         conn.close()
@@ -146,8 +149,11 @@ def registrationform():
         conn.commit()
         conn.close()
 
-    def appoint():
-        appoint1()
+    def appoint9():
+        appoint2()
+
+    def fordoctors():
+        prescribe1()
 
 
 
@@ -240,8 +246,11 @@ def registrationform():
     edit_btn.place(x=400, y=430)
     save_button = Button(root, text="Save record", command=editor)
     save_button.place(x=690, y=430)
-    appointment_button = Button(root, text="APPOINTMENT ", command=appoint)
+    appointment_button = Button(root, text="APPOINTMENT ", command=appoint9)
     appointment_button.place(x=800, y=430)
+    prescr_button = Button(root, text="PRESCRIBE MEDICINE ", command=fordoctors)
+    prescr_button.place(x=900, y=430)
+
     conn.commit()
     conn.close()
     mainloop()
