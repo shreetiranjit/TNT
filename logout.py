@@ -9,7 +9,6 @@ def logout():
     if response > 0:
         root.destroy()
         return
-
 mybutton = Button(text="Logout", height="3", width="30", font=("gudy old style", 12, "bold"), fg="#6162FF", bg="#99c2ff",  command=logout)
 mybutton.place(x=20, y=10)
 
