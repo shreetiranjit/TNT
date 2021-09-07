@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 
-
 root=Tk()
 root.title("Logout Application")
 root.geometry('400x150')
